@@ -73,7 +73,9 @@ function handleSubmit(event) {
             irony: data.irony
           });
         })
-        .then(()=>updateUI)
+        .then(function(){
+          updateUI('/get')
+        })
     } else {
       console.log("Not Valid URL");
       alert("Not valid url. Please enter valid url");
