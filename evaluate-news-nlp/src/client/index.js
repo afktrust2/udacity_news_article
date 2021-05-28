@@ -11,7 +11,4 @@ export{
   handleSubmit
 }
 
-console.log(checkForName);
-
-alert("I EXIST")
-console.log("CHANGE!!");
+console.log(isValidURL);

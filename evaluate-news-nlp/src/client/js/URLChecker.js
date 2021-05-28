@@ -13,8 +13,6 @@ function isValidURL(inputURL) {
         return true;
     }
     else{
-      console.log("Not Valid URL");
-      alert("Not valid url. Please enter valid url");
       return false;
     }
 }
