@@ -50,9 +50,11 @@ function handleSubmit(event) {
       const request = await fetch("/get")
           try {
               const allData = await request.json();
-              result.appendChild(allData.subjective);
-              result.appendChild(allData.confindent);
-              result.appendChild(allData.irony);
+              result.innerHTML = `
+            <li class="results__item"><span class="api__title">URL:</span> ${inputURL}</li>
+            <li class="results__item"><span class="api__title">Subjectivity:</span> ${allData.subjectivity};</li>
+            <li class="results__item"><span class="api__title">Confidence:</span> ${allData.confidence}%;</li>
+            <li class="results__item"><span class="api__title">Irony:</span> ${allData.irony}.</li>`;
           } catch(error) {
               console.log("error", error)
           };
