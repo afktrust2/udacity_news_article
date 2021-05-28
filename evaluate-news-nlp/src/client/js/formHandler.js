@@ -1,4 +1,4 @@
-import { isValidURL } from './js/URLChecker'
+import { isValidURL } from './js/URLChecker.js'
 
 function handleSubmit(event) {
     event.preventDefault();
