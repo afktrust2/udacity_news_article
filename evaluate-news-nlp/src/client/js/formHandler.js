@@ -1,4 +1,4 @@
-import { isValidURL } from './js/URLChecker.js'
+import { isValidURL } from './URLChecker'
 
 function handleSubmit(event) {
     document.querySelector("#submit").addEventListener("click", (event) => {
