@@ -5,5 +5,5 @@ describe("Testing the regex functionality", () => {
     // The test() function has two arguments - a string description, and an actual test as a callback function.
     test("Testing the checkForURL() function", () => {
         //If returns true than it is working
-        expect(checkForURL).toBeTruthy();
+        expect(isValidURL).toBeTruthy();
 })});
