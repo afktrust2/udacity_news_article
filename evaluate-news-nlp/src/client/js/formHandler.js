@@ -22,6 +22,7 @@ function handleSubmit(event) {
 
           try {
             const newData = await res.json();
+            console.log(newData);
             return newData;
         } catch(error) {
             console.log("error", error);
@@ -44,6 +45,7 @@ function handleSubmit(event) {
         const req = await fetch('/api');
         data = await req.json();
         apiKey = data.key;
+        console.log(apiKey);
         return apiKey;
       };
       //update the UI with data response
@@ -51,11 +53,12 @@ function handleSubmit(event) {
         const request = await fetch("/get")
             try {
                 const allData = await request.json();
-                result.innerHTML = `
-              <li class="results__item"><span class="api__title">URL:</span> ${inputURL}</li>
-              <li class="results__item"><span class="api__title">Subjectivity:</span> ${allData.subjectivity};</li>
-              <li class="results__item"><span class="api__title">Confidence:</span> ${allData.confidence}%;</li>
-              <li class="results__item"><span class="api__title">Irony:</span> ${allData.irony}.</li>`;
+                result.innerHTML = `<ul>
+              <li><span>URL:</span> ${inputURL}</li>
+              <li><span>Subjectivity:</span> ${allData.subjectivity};</li>
+              <li><span>Confidence:</span> ${allData.confidence}%;</li>
+              <li><span>Irony:</span> ${allData.irony}.</li>
+              </ul>`;
             } catch(error) {
                 console.log("error", error)
             };
