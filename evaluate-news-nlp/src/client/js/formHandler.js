@@ -1,10 +1,11 @@
-import { isValidURL } from './URLChecker'
+import { isValidURL } from './URLChecker';
 
-const handleSubmit = document.querySelector("#submit").addEventListener("click", (event) => {
+function handleSubmit() {
+    document.getElementById('click').addEventListener("click", async(event) => {
     event.preventDefault();
 
     //local variables for the function
-    const baseURl = 'https://api.meaningcloud.com/sentiment-2.1';
+    const baseURL = 'https://api.meaningcloud.com/sentiment-2.1';
     const result = document.getElementById('results').innerHTML;
     let apiKey = '';
     let data = {};
@@ -12,11 +13,11 @@ const handleSubmit = document.querySelector("#submit").addEventListener("click",
     const postData = async (url = "", data = {}) => {
         const res = await fetch(url, {
             method: "POST",
-            credentials: "same-origin",
+            credentials: "cors",
             headers: {
                 "Content-Type":"application/json",
             },
-            body: JSON.stringify(data),
+            body: JSON.stringify({url:data}),
         });
 
         try {
@@ -25,32 +26,31 @@ const handleSubmit = document.querySelector("#submit").addEventListener("click",
           return newData;
       } catch(error) {
           console.log("error", error);
-      };
+      }
     };
 
-    const getRes = async (baseURL, apiKey, url)=>{
-      const res = await fetch(`${baseURL}key=${zipCode}&lang=en&url=${url}`);
+    const getRes = async (baseURL, key, url)=>{
+      const res = await fetch(`${baseURL}key=${key}&lang=en&url=${url}`);
       console.log(res);
       try {
         const data = await res.json();
-        console.log(data)
-        return data
+        console.log(data);
+        return data;
       }  catch(error) {
         // appropriately handle the error
         console.log("error", error);
-      };
+      }
     };
     //grabs api from .env file
     async function GetAPI() {
       const req = await fetch('/api');
       data = await req.json();
       apiKey = data.key;
-      console.log(apiKey);
       return apiKey;
     };
     //update the UI with data response
     const updateUI = async ()=> {
-      const request = await fetch("/get")
+      const request = await fetch("/get");
           try {
               const allData = await request.json();
               result.innerHTML = `<ul>
@@ -60,15 +60,16 @@ const handleSubmit = document.querySelector("#submit").addEventListener("click",
             <li><span>Irony:</span> ${allData.irony}.</li>
             </ul>`;
           } catch(error) {
-              console.log("error", error)
-          };
+              console.log("error", error);
+          }
     };
 
     // check what url was put into the form field
-    let inputURL = document.getElementById('name').value
+    let inputURL = document.getElementById('name').value;
 
-    GetAPI()
-    if (Client.isValidURL(inputURL) == true) {
+    GetAPI();
+    if (isValidURL(inputURL) == true) {
+        console.log(apiKey);
         getRes(baseURL, apiKey, inputURL)
         .then((data) =>{
           return postData('/post', {
@@ -78,14 +79,14 @@ const handleSubmit = document.querySelector("#submit").addEventListener("click",
           });
         })
         .then(function(){
-          updateUI('/get')
-        })
+          updateUI('/get');
+        });
     } else {
       console.log("Not Valid URL");
       alert("Not valid url. Please enter valid url");
-      return false
+      return false;
     }
-});
+  });
+};
 
-
-export { handleSubmit }
+export { handleSubmit };

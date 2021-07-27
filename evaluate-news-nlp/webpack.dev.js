@@ -9,13 +9,13 @@ module.exports = {
     devtool: 'source-map',
     stats: 'verbose',
     devServer: {
-    port: 8080,
-    inline: true,
-    hot: true
+      port: 8080,
+      inline: true,
+      hot: true,
     },
     output: {
       libraryTarget: 'var',
-      library: 'Client'
+      library: 'Client',
     },
     module: {
         rules: [
@@ -34,15 +34,8 @@ module.exports = {
         new HtmlWebPackPlugin({
             template: "./src/client/views/index.html",
             filename: "./index.html",
-        }),
-        new CleanWebpackPlugin({
-            // Simulate the removal of files
-            dry: true,
-            // Write Logs to Console
-            verbose: true,
-            // Automatically remove all unused webpack assets on rebuild
-            cleanStaleWebpackAssets: true,
-            protectWebpackAssets: false
+            minify: false,
+            cache: false,
         })
     ]
 }

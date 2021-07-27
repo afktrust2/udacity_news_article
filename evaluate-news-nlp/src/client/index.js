@@ -1,14 +1,14 @@
-import { isValidURL } from './js/URLChecker'
-import { handleSubmit } from './js/formHandler'
+import { isValidURL } from './js/URLChecker';
+import { handleSubmit } from './js/formHandler';
 
-import './styles/base.scss'
-import './styles/footer.scss'
-import './styles/form.scss'
-import './styles/header.scss'
+import './styles/main.scss';
 
 export{
   isValidURL,
   handleSubmit
-}
+};
+
 
 console.log(isValidURL);
+console.log(handleSubmit);
+handleSubmit();
