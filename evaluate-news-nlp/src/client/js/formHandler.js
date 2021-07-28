@@ -44,8 +44,9 @@ function handleSubmit() {
     //grabs api from .env file
     async function GetAPI() {
       const req = await fetch('/api');
-      data = await req.json();
+      let data = await req.json();
       apiKey = data.key;
+      console.log(apiKey)
       return apiKey;
     };
     //update the UI with data response
@@ -67,9 +68,9 @@ function handleSubmit() {
     // check what url was put into the form field
     let inputURL = document.getElementById('name').value;
 
-    GetAPI();
     if (isValidURL(inputURL) == true) {
-        console.log(apiKey);
+      GetAPI()
+      console.log(apiKey);
         getRes(baseURL, apiKey, inputURL)
         .then((data) =>{
           return postData('/post', {
